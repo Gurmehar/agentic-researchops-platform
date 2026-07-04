@@ -1,0 +1,1 @@
+uv add  fastapi uvicorn pymongo pydantic
