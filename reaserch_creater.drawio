@@ -1,0 +1,129 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="k8jPozt_6-iD9RiAiuie">
+    <mxGraphModel dx="1006" dy="598" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-21" edge="1" parent="1" source="vyw-0AAVQ-L4efeTOQzi-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="vyw-0AAVQ-L4efeTOQzi-23">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="240" y="195" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-36" edge="1" parent="1" source="vyw-0AAVQ-L4efeTOQzi-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="vyw-0AAVQ-L4efeTOQzi-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-37" connectable="0" parent="vyw-0AAVQ-L4efeTOQzi-36" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Check status &lt;br&gt;and validate&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.3371" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="UI&amp;nbsp;" vertex="1">
+          <mxGeometry height="60" width="120" x="50" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Authenticate&amp;nbsp;&amp;nbsp;" vertex="1">
+          <mxGeometry height="60" width="120" x="240" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-4" edge="1" parent="1" source="vyw-0AAVQ-L4efeTOQzi-9" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="110" y="70" />
+            </Array>
+            <mxPoint x="110" y="250" as="sourcePoint" />
+            <mxPoint x="240" y="70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-10" edge="1" parent="1" source="vyw-0AAVQ-L4efeTOQzi-1" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="vyw-0AAVQ-L4efeTOQzi-9" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points" />
+            <mxPoint x="110" y="260" as="sourcePoint" />
+            <mxPoint x="240" y="70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-9" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="calls&amp;nbsp; api with Login&lt;br&gt;Gmail/FB/...&lt;br&gt;Return MD5 for each user" vertex="1">
+          <mxGeometry height="40" width="180" x="20" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-12" edge="1" parent="1" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="vyw-0AAVQ-L4efeTOQzi-13" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="360" y="180" as="sourcePoint" />
+            <mxPoint x="520" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;guardrails_service&lt;/b&gt;: check restricted topic&amp;nbsp; of reaerch using LLM and WEB,DB other source if any" vertex="1">
+          <mxGeometry height="90" width="120" x="580" y="135" as="geometry" />
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-14" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="DB" vertex="1">
+          <mxGeometry height="50" width="70" x="500" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-15" edge="1" parent="1" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="vyw-0AAVQ-L4efeTOQzi-13" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="540" y="80" />
+              <mxPoint x="760" y="80" />
+            </Array>
+            <mxPoint x="580" y="135" as="sourcePoint" />
+            <mxPoint x="590" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-16" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="LLM&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="70" x="620" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-17" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&lt;div&gt;WEB&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="70" x="710" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-22" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="if&amp;nbsp; topic&amp;nbsp; has passed&amp;nbsp;" vertex="1">
+          <mxGeometry height="30" width="60" x="425" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-26" edge="1" parent="1" source="vyw-0AAVQ-L4efeTOQzi-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="vyw-0AAVQ-L4efeTOQzi-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-27" connectable="0" parent="vyw-0AAVQ-L4efeTOQzi-26" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Save in DB, &lt;br&gt;along with user details&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="0.1234" y="3" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-23" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="Validate reaserch&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="130" x="230" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-24" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" value="DB" vertex="1">
+          <mxGeometry height="80" width="60" x="770" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-29" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;Re-serach &amp;amp; Planing&lt;/b&gt; Service&lt;br&gt;Use LLM Agent&lt;br&gt;service will generate search and save in DB, wait for end user to validate&amp;nbsp;&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="145" x="222.5" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-33" edge="1" parent="1" source="vyw-0AAVQ-L4efeTOQzi-29" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="vyw-0AAVQ-L4efeTOQzi-23" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="400" y="370" as="sourcePoint" />
+            <mxPoint x="450" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vyw-0AAVQ-L4efeTOQzi-38" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="370" y="360" />
+            </Array>
+            <mxPoint x="370" y="370" as="sourcePoint" />
+            <mxPoint x="770" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3M96A59CcAosiwCJEdR5-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="end user valiation&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="230" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="3M96A59CcAosiwCJEdR5-2" edge="1" parent="1" source="3M96A59CcAosiwCJEdR5-1" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="vyw-0AAVQ-L4efeTOQzi-29" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="290" y="489" as="sourcePoint" />
+            <mxPoint x="300" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3M96A59CcAosiwCJEdR5-3" edge="1" parent="1" source="3M96A59CcAosiwCJEdR5-1" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" target="vyw-0AAVQ-L4efeTOQzi-24" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="450" y="500" />
+            </Array>
+            <mxPoint x="400" y="330" as="sourcePoint" />
+            <mxPoint x="850" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
