@@ -12,6 +12,10 @@ class Status(Enum):
     UNDER_ANALYSIS = "under_analysis"
     ANALYZED = "analyzed"
     PUBLISHED = "published"
+    START_RESEARCH = "start_research"
+    RESEARCH_IN_PROGRESS = "research_in_progress"
+    RESEARCH_COMPLETED = "research_completed"
+    DELETE_RESEARCH = "delete_research"
 
 
 class ResearchDetails(BaseModel):

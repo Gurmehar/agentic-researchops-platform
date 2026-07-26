@@ -128,7 +128,7 @@ class ResearchDBService:
         doc_dict = {}
         doc_list = self.collection.find(
             {"topic": topic_name},
-            {"topic": 1, "status": 1, "name": 1},
+            {"topic": 1, "status": 1, "name": 1, "_id": 1},
             sort=[("updated_at", -1), ("created_at", -1)],
         )
 
@@ -198,3 +198,108 @@ class ResearchDBService:
     def close(self) -> None:
         """Close the MongoDB connection."""
         self.client.close()
+
+    def delete_research_by_id(self, research_id) -> str | None:
+        """Delete research from MongoDB and ChromaDB by research ID."""
+        try:
+            # Delete from MongoDB
+            document = self.findById(research_id)
+            if document is None:
+                return None
+
+            result = self.collection.delete_one({"_id": ObjectId(research_id)})
+            if result.deleted_count == 0:
+                return None
+
+            # Delete from ChromaDB
+            var = self.chroma_collection.delete(
+                where={"topic": [document.get("topic", "")]}
+            )
+            print(f"ChromaDB deletion result: {var}")
+            return document.get("topic", None)
+        except (PyMongoError, InvalidId) as e:
+            print(f"Error deleting research: {e}")
+            return None
+
+    def findById(self, research_id: str) -> dict[str, Any] | None:
+        """Find a research document by its MongoDB ID."""
+        try:
+            document = self.collection.find_one({"_id": ObjectId(research_id)})
+            if document is not None:
+                return self._status_response_from_document(document)
+        except (PyMongoError, InvalidId) as e:
+            print(f"Error finding research by ID: {e}")
+            return None
+        return None
+
+    def update_doc_status(self, id: str, status: str) -> dict[str, Any] | None:
+        """Atomically apply an allowed research workflow status transition."""
+        required_current_status = {
+            "start_research": "under_analysis",
+            "research_in_progress": "start_research",
+            "research_failed": "research_in_progress",
+        }.get(status)
+        if required_current_status is None:
+            return None
+
+        try:
+            result = self.collection.update_one(
+                {
+                    "_id": ObjectId(id),
+                    "status": required_current_status,
+                },
+                {"$set": {"status": status, "updated_at": datetime.now(timezone.utc)}},
+                upsert=False,
+            )
+            if result.matched_count == 1:
+                return self.findById(id)
+        except (PyMongoError, InvalidId) as e:
+            print(f"Error updating research status: {e}")
+            return None
+        return None
+
+    def reset_research_for_retry(self, id: str) -> dict[str, Any] | None:
+        """Return an unsuccessful active workflow to the retryable UI state."""
+        try:
+            result = self.collection.update_one(
+                {
+                    "_id": ObjectId(id),
+                    "status": {
+                        "$in": ["start_research", "research_in_progress"],
+                    },
+                },
+                {
+                    "$set": {
+                        "status": "under_analysis",
+                        "updated_at": datetime.now(timezone.utc),
+                    }
+                },
+                upsert=False,
+            )
+            if result.matched_count == 1:
+                return self.findById(id)
+        except (PyMongoError, InvalidId) as e:
+            print(f"Error resetting research for retry: {e}")
+            return None
+        return None
+
+    def update_research(self, doc: dict) -> dict[str, Any] | None:
+        """Update research details of a document by its MongoDB ID."""
+        try:
+            update_fields = {
+                "research_synopsis": doc.get("research_synopsis"),
+                "research_area": doc.get("research_area"),
+                "sources": doc.get("sources"),
+                "status": "research_completed",
+                "updated_at": datetime.now(timezone.utc),
+            }
+            result = self.collection.update_one(
+                {"_id": ObjectId(doc["_id"]), "status": "research_in_progress"},
+                {"$set": update_fields},
+            )
+            if result.modified_count > 0:
+                return self.findById(doc["_id"])
+        except (PyMongoError, InvalidId) as e:
+            print(f"Error updating research details: {e}")
+            return None
+        return None

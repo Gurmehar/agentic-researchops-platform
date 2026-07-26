@@ -8,7 +8,7 @@ from models.research_deatils import ResearchDetails, Status
 from repos import db_service
 from repos.db_service import ResearchDBService
 from models.research_deatils import ResearchDetails, ResearchStatusResponse, Status
-from guardrails import validate_research_topic
+from guardrails import validate_research_topic, begin_research
 
 
 def _validate_llm_result(llm_result: str) -> tuple[str, str]:
@@ -76,6 +76,7 @@ def find_research_status_by_name(topic_name: str) -> dict[str, str] | None:
 def find_research_status_by_userId(userId: str) -> dict[str, str] | None:
     service = ResearchDBService()
     try:
+
         research_status = service.get_research_status_by_userid(userId)
         if research_status:
             return research_status
@@ -85,17 +86,61 @@ def find_research_status_by_userId(userId: str) -> dict[str, str] | None:
     return None
 
 
+def delete_research_by_id(research_id: str) -> str | None:
+    service = ResearchDBService()
+    try:
+        topic_name = service.delete_research_by_id(research_id)
+        return topic_name
+    except Exception as e:
+        print(f"Error deleting research: {e}")
+        return None
+
+
+def send_topic_for_research(research_id: str) -> dict | None:
+    service = ResearchDBService()
+    try:
+        document = service.findById(research_id)
+        result = (
+            begin_research.main(research_id, document["topic"]) if document else None
+        )
+        if result is None:
+            return None
+        return service.findById(research_id)
+    except Exception as e:
+        print(f"Error sending topic for research: {e}")
+        service.reset_research_for_retry(research_id)
+        return {"message": "Failed to save research details.", "error": str(e)}
+
+
+def update_topic_for_research(research_id: str) -> dict | None:
+    service = ResearchDBService()
+    try:
+        document = service.update_doc_status(
+            research_id,
+            Status.START_RESEARCH.value,
+        )
+        if document is None:
+            return None
+        return document
+    except Exception as e:
+        print(f"Error updating topic for research: {e}")
+        return {"message": "Failed to save research details.", "error": str(e)}
+
+
 # if __name__ == "__main__":
-#     data = {
-#         "name": "John Doe",
-#         "status": "pending",
-#         "is_granted": False,
-#         "research_area": "Data Structures",
-#         "sources": ["https://www.geeksforgeeks.org/batch/data-science-6?tab=Resources"],
-#         "research_synopsis": "Implementation of Data Structure in RAG",
-#         "topic": "Implementation of Data Structure in RAG",
-#     }
-#     # payload = ResearchDetails(**data)
-#     # result = create_research_doc(payload)
+#     print(
+#         send_topic_for_research("6a4e64215174e22c451091ac")
+#     )  # Replace with a valid research_id
+# data = {
+#     "name": "John Doe",
+#     "status": "pending",
+#     "is_granted": False,
+#     "research_area": "Data Structures",
+#     "sources": ["https://www.geeksforgeeks.org/batch/data-science-6?tab=Resources"],
+#     "research_synopsis": "Implementation of Data Structure in RAG",
+#     "topic": "Implementation of Data Structure in RAG",
+# }
+# # payload = ResearchDetails(**data)
+# # result = create_research_doc(payload)
 # print(find_research_status_by_name("Effects of frozen food consumption"))
-#     print(find_research_status_by_userId("3x-12a"))
+# print(find_research_status_by_userId("3x-12a"))
